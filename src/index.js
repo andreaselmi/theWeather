@@ -3,7 +3,7 @@ import $ from 'jquery';
 import _ from 'lodash';
 
 
-$("h1").text("me la suchi").css({
+$("h1").text("prova prova prova").css({
   "color": "red"
 });
 
@@ -12,4 +12,6 @@ const prova = process.env.PROVA;
 console.log(prova);
 
 let arr = ['Another', 'module', 'loaded!'];
-console.log(_.join(arr, " "));
+$("body").append("<p>" +
+  _.join(arr, " ") +
+  "</p>");
