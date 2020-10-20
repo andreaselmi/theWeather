@@ -22,6 +22,9 @@ module.exports = {
         // Compiles Sass to CSS
         'sass-loader',
       ],
+    }, {
+      test: /\.(jpg|png|svg)$/,
+      use: 'file-loader?name=[name].[ext]&outputPath=./icon/'
     }, ],
   },
   plugins: [
