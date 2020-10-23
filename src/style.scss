@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Montserrat&display=swap');
 
 $primary: #005DFF;
-$button-bg-color: #949494;
-$background: #f5f6fa;
-$text: #9c9c9c;
-$input-bg-color: #fff;
-$input-text-color: #a3a3a3;
-$button-text-color: #fff;
+$secondary: #fff;
+$button-background: #23A279;
+$padding-form: 8px 15px;
+$text-color-field: #a6a6a6;
+
+//media queries
+$tablet-width: 768px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
 
 * {
   margin    : 0;
@@ -29,6 +36,9 @@ body {
     height          : 100%;
     z-index         : -1;
     position        : absolute;
+    @include tablet {
+      clip-path: polygon(54% 0, 100% 0, 100% 100%, 27% 100%);
+    }
   }
 }
 
@@ -37,92 +47,144 @@ body {
   padding              : 50px;
   text-align           : center;
   display              : grid;
-  grid-template-columns: auto;
-  grid-template-rows   : 2fr 5fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows   : 5fr 1fr;
+  grid-template-areas  : "header" "footer";
 
-  .header {
-    padding-top: 20px;
-    color      : white;
+  @include tablet {
+    grid-template-columns: 1fr;
+    grid-template-rows   : 1fr 3fr;
+    grid-template-areas  : "header header" "footer footer";
 
-    img {
-      width: 100px;
-    }
   }
 
-  .btn {
-    font-size     : 0.6em;
-    text-transform: uppercase;
-    display       : inline-block;
-    background    : transparent;
-    border        : 0;
-    outline       : 0;
-    padding       : 0;
-    transition    : all 200ms ease-in;
-    cursor        : pointer;
-
-    &--primary {
-      background   : $button-bg-color;
-      color        : $button-text-color;
-      box-shadow   : 0 0 10px 2px rgba(0, 0, 0, .1);
-      border-radius: 2px;
-      padding      : 10px 23px;
-
-      &:hover {
-        background: lighten($button-bg-color, 10%);
-      }
-
-      &:active {
-        background: darken($button-bg-color, 10%);
-        box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, .2);
-      }
+  .header__container {
+    grid-area: header;
+    @include tablet {
+      display              : grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      grid-template-rows   : 1fr 3fr;
+      grid-template-areas  : "city gap search" "city gap info";
     }
 
-    &--inside {
-      margin-left: -70px;
-    }
-  }
+    //form
+    .header {
+      @include tablet {
+        grid-area: search;
+      }
 
-  .form {
-    &__field {
-      width     : 250px;
-      background: #fff;
-      color     : $input-text-color;
-      font      : inherit;
-      box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
-      border    : 0;
-      outline   : 0;
-      padding   : 15px 13px;
+      form {
+        display              : grid;
+        grid-template-columns: 5fr 1fr;
+
+        .form__field {
+          border                   : none;
+          border-top-left-radius   : 5px;
+          border-bottom-left-radius: 5px;
+          color                    : $text-color-field;
+          padding                  : $padding-form;
+
+          &:focus {
+            outline: none;
+            color  : darken($text-color-field, 10%);
+          }
+        }
+
+        .btn {
+          border                    : none;
+          padding                   : $padding-form;
+          color                     : $secondary;
+          background-color          : $button-background;
+          border-top-right-radius   : 5px;
+          border-bottom-right-radius: 5px;
+
+          &:focus {
+            outline: none;
+          }
+
+          &:hover {
+            background-color: lighten($button-background, 6%);
+          }
+
+          &:active {
+            background-color: $button-background;
+          }
+        }
+      }
+    }
+    //form end
+
+    .city {
+      padding-top: 20px;
+      color      : $secondary;
+
+      img {
+        width: 100px;
+      }
+      @include tablet {
+        color    : $primary;
+        font-size: 2em;
+        grid-area: city;
+
+        img {
+          width: 200px;
+        }
+      };
+
     }
   }
 
   .main__info {
     padding-top: 50px;
     font-size  : 1.5em;
-    color      : white;
+    color      : $secondary;
+    text-align : left;
+    @include tablet {
+      grid-area: info;
+    };
   }
 
   .main__footer {
+    grid-area            : footer;
     display              : grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas  : "location" "logo";
 
     span {
-      background-color: white;
+      cursor          : pointer;
+      background-color: $secondary;
       padding         : 5px;
       font-size       : 1.5em;
       border-radius   : 50%;
       color           : $primary;
       position        : absolute;
       bottom          : 10px;
-      left            : 20px;
+      left            : 10px;
+      transition      : border 0.3s;
+
+      &:hover {
+        border: 4px solid $secondary;
+      }
+      @include tablet {
+        background-color: $primary;
+        color           : $secondary;
+
+        &:hover {
+          border: 8px solid $primary;
+        }
+      }
     }
 
     h3 {
       font-family: 'Do Hyeon', sans-serif;
       position   : absolute;
       bottom     : 10px;
-      right      : 15px;
+      right      : 10px;
       font-size  : 1.5em;
       color      : $primary;
+      @include tablet {
+        color: $secondary;
+      }
     }
   }
 }
