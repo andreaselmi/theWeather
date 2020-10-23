@@ -22,15 +22,9 @@ const images = importAll(
 
 
 
-/*$("h1").text("prova prova prova").css({
-  "color": "red"
-});*/
+const meteoKey = process.env.METEO_API_KEY;
+const iconUrl = "http://openweathermap.org/img/wn/";
 
-const prova = process.env.PROVA;
+//example code icon 10d@2x.png
 
-console.log(prova);
-
-/*let arr = ['Another', 'module', 'loaded!'];
-$("body").append("<p>" +
-  _.join(arr, " ") +
-  "</p>");*/
+console.log(meteoKey);

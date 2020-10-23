@@ -8,9 +8,16 @@ $text-color-field: #a6a6a6;
 
 //media queries
 $tablet-width: 768px;
+$desktop-width: 1200px;
 
 @mixin tablet {
   @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
     @content;
   }
 }
@@ -37,38 +44,49 @@ body {
     z-index         : -1;
     position        : absolute;
     @include tablet {
-      clip-path: polygon(54% 0, 100% 0, 100% 100%, 27% 100%);
+      clip-path: polygon(41% 0, 100% 0%, 100% 100%, 15% 100%);
+    }
+    @include desktop {
+      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 30% 100%);
     }
   }
 }
 
 .main {
   height               : 100%;
-  padding              : 50px;
+  padding              : 30px;
   text-align           : center;
   display              : grid;
   grid-template-columns: 1fr;
   grid-template-rows   : 5fr 1fr;
   grid-template-areas  : "header" "footer";
 
+  //queries main
   @include tablet {
+    width                : 90%;
+    padding              : 50px 0;
+    margin               : 0 auto;
     grid-template-columns: 1fr;
-    grid-template-rows   : 1fr 3fr;
+    grid-template-rows   : 2fr 1fr;
     grid-template-areas  : "header header" "footer footer";
-
+    position             : relative;
+    //queries header container
+    .header__container {
+      display              : grid;
+      grid-template-columns: 1fr 0.5fr 1.5fr;
+      grid-template-rows   : 1fr 3fr;
+      grid-template-areas  : "city gap search" "city gap info";
+    }
+  }
+  @include desktop {
+    width: 60%;
   }
 
   .header__container {
     grid-area: header;
-    @include tablet {
-      display              : grid;
-      grid-template-columns: 1fr 1fr 1.5fr;
-      grid-template-rows   : 1fr 3fr;
-      grid-template-areas  : "city gap search" "city gap info";
-    }
 
     //form
-    .header {
+    .header__form {
       @include tablet {
         grid-area: search;
       }
@@ -114,6 +132,7 @@ body {
     }
     //form end
 
+    //city title
     .city {
       padding-top: 20px;
       color      : $secondary;
@@ -130,61 +149,70 @@ body {
           width: 200px;
         }
       };
-
     }
+    //end city title
   }
+  //end header container
 
+  //info
   .main__info {
-    padding-top: 50px;
-    font-size  : 1.5em;
-    color      : $secondary;
-    text-align : left;
+    font-size : 1.5em;
+    color     : $secondary;
+    text-align: left;
+
     @include tablet {
       grid-area: info;
+
+      p {
+        padding-top: 20px;
+      }
     };
   }
+  //end info
 
-  .main__footer {
-    grid-area            : footer;
-    display              : grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas  : "location" "logo";
+}
 
-    span {
-      cursor          : pointer;
-      background-color: $secondary;
-      padding         : 5px;
-      font-size       : 1.5em;
-      border-radius   : 50%;
-      color           : $primary;
-      position        : absolute;
-      bottom          : 10px;
-      left            : 10px;
-      transition      : border 0.3s;
+//footer
+.main__footer {
+  grid-area: footer;
+  display  : grid;
+
+  span {
+    cursor          : pointer;
+    background-color: $secondary;
+    padding         : 5px;
+    font-size       : 1.5em;
+    border-radius   : 50%;
+    color           : $primary;
+    position        : absolute;
+    bottom          : 10px;
+    left            : 10px;
+    transition      : border 0.3s;
+
+    &:hover {
+      border: 4px solid $secondary;
+    }
+    @include tablet {
+      background-color: $primary;
+      color           : $secondary;
 
       &:hover {
-        border: 4px solid $secondary;
-      }
-      @include tablet {
-        background-color: $primary;
-        color           : $secondary;
-
-        &:hover {
-          border: 8px solid $primary;
-        }
+        border: 8px solid $primary;
       }
     }
+  }
 
-    h3 {
-      font-family: 'Do Hyeon', sans-serif;
-      position   : absolute;
-      bottom     : 10px;
-      right      : 10px;
-      font-size  : 1.5em;
-      color      : $primary;
-      @include tablet {
-        color: $secondary;
-      }
+  //footer logo
+  h3 {
+    font-family: 'Do Hyeon', sans-serif;
+    position   : absolute;
+    bottom     : 10px;
+    right      : 10px;
+    font-size  : 1.5em;
+    color      : $primary;
+    @include tablet {
+      color: $secondary;
     }
   }
 }
+//end footer
