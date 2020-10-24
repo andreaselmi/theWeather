@@ -44,7 +44,8 @@ body {
     z-index         : -1;
     position        : absolute;
     @include tablet {
-      clip-path: polygon(41% 0, 100% 0%, 100% 100%, 15% 100%);
+      //clip-path: polygon(41% 0, 100% 0%, 100% 100%, 15% 100%);
+      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 25% 100%);
     }
     @include desktop {
       clip-path: polygon(50% 0, 100% 0%, 100% 100%, 30% 100%);
@@ -138,7 +139,7 @@ body {
       color      : $secondary;
 
       img {
-        width: 100px;
+        width: 150px;
       }
       @include tablet {
         color    : $primary;
@@ -146,7 +147,9 @@ body {
         grid-area: city;
 
         img {
-          width: 200px;
+          left : 8%;
+          top  : 50%;
+          width: 180px;
         }
       };
     }

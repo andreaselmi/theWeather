@@ -3,6 +3,11 @@ const path = require("path");
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
+  experiments: {
+    syncWebAssembly: true,
+    topLevelAwait: true,
+    asyncWebAssembly: true,
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
