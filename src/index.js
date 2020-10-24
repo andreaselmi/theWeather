@@ -41,9 +41,10 @@ function displayResult(res) {
   let cityName = _.get(res, "data.name", "Non disponibile");
   let weatherDesc = _.get(res, "data.weather[0].description", "Non disponibile");
   let icon = res.data.weather[0].icon;
-  city.append(`<h1>${cityName}</h1>`)
+  city.append(`<h1>${cityName}</h1>`);
   city.append(`<h3>${weatherDesc}</h3>`);
-  city.append(`<img>`).attr("src", `${iconUrl}${icon}${iconCode}`);
+  city.append(`<img>`);
+  $(".city img").attr("src", `${iconUrl}${icon}${iconCode}`);
 }
 
 function removeChild() {
