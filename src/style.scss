@@ -10,6 +10,7 @@ $text-color-field: #a6a6a6;
 $small-device-width: 360px;
 $tablet-width: 768px;
 $desktop-width: 1200px;
+$small-device-height: 700px;
 
 @mixin landscapeSmallDevice {
   @media (max-height:450px) and (max-width:767px) and (orientation:landscape) {
@@ -28,7 +29,13 @@ $desktop-width: 1200px;
 }
 
 @mixin smallDevice {
-  @media (max-width: #{$small-device-width}) {
+  @media (max-width:#{$small-device-width}) {
+    @content;
+  }
+}
+
+@mixin smallDevicePortrait {
+  @media (max-height: #{$small-device-height}) and (orientation:portrait) {
     @content;
   }
 }
@@ -187,8 +194,18 @@ body {
         font-size: 2em;
         max-width: 600px;
       }
+      @include landscape {
+        margin-top: 0;
+        font-size : 1em;
+      }
       @include landscapeSmallDevice {
         display: none;
+      }
+      @include smallDevicePortrait {
+        display: none;
+      }
+      @include landscapeBigDevice {
+        font-size: 2em;
       }
     }
 
@@ -224,9 +241,20 @@ body {
     @include landscape {
       max-height: 200px;
       overflow  : auto;
+      font-size : 1em;
     }
     @include landscapeBigDevice {
-      max-height: 1000px;
+      max-height: 500px;
+      overflow  : auto;
+      font-size : 2em;
+    }
+    @include landscapeSmallDevice {
+      margin-top: 20px;
+    }
+    @include smallDevicePortrait {
+      margin-top: 20px;
+      max-height: 400px;
+      overflow  : auto;
     }
   }
   //end info

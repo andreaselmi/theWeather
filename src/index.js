@@ -62,7 +62,7 @@ function displayResults(res) {
   city.append(`<h1>${cityName}`);
   city.append(`<h3>${weatherDesc}`);
   city.append(`<img>`);
-  $(".city img").attr("src", `/icons/${icon}.png`);
+  $(".city img").attr("src", `icons/${icon}.png`);
 
   //results main__info
   let state = _.get(res, "data.sys.country", noResult);
@@ -89,10 +89,10 @@ function displayResults(res) {
 function displayErrors(err) {
   removeChild();
   city.append(`<img>`);
-  $(".city img").attr("src", `/icons/404.png`);
+  $(".city img").attr("src", `icons/404.png`);
   switch (err.response.status) {
     case 400:
-      info.append(`<h3> Controlla la sintassi </h3>`);
+      info.append(`<h3> Digita un nome di città valido </h3>`);
       break;
     case 404:
       info.append(`<h3> Nessun risultato trovato</h3>`);
