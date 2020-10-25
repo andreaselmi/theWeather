@@ -72,7 +72,7 @@ function displayResults(res) {
   let tempMax = _.get(res, "data.main.temp_max", noResult);
   let wind = _.get(res, "data.wind.speed", noResult);
   let windDirection = _.get(res, "data.wind.deg", noResult);
-  let sunrise = (res.data.sys.sunrise) ? new Date(res.data.sys.sunrise * 1000) : noResult;
+  let sunrise = (res.data.sys.sunrise) ? new Date((res.data.sys.sunrise * 1000)) : noResult;
   let sunset = (res.data.sys.sunset) ? new Date(res.data.sys.sunset * 1000) : noResult;
 
 
@@ -115,12 +115,7 @@ form.submit((e) => {
   (getData(form__field.val()));
 });
 
-//all'apertura carica Roma
-getData("roma,it");
-
-
 //geolocation
-
 function success(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -137,3 +132,6 @@ function error(err) {
 location.click(function() {
   navigator.geolocation.getCurrentPosition(success, error);
 });
+
+//city default
+getData("roma,it");
