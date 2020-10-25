@@ -29,7 +29,7 @@ module.exports = {
       ],
     }, {
       test: /\.(jpg|png|svg)$/,
-      use: 'file-loader?name=[name].[ext]&outputPath=./icon/'
+      use: 'file-loader?name=[name].[ext]&outputPath=./icons/'
     }, ],
   },
   plugins: [

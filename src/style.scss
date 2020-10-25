@@ -7,8 +7,31 @@ $padding-form: 8px 15px;
 $text-color-field: #a6a6a6;
 
 //media queries
+$small-device-width: 360px;
 $tablet-width: 768px;
 $desktop-width: 1200px;
+
+@mixin landscapeSmallDevice {
+  @media (max-height:450px) and (max-width:767px) and (orientation:landscape) {
+    @content;
+  }
+}
+@mixin landscapeBigDevice {
+  @media (min-width:#{$tablet-width}) and (min-height: 550px) and (orientation:landscape) {
+    @content;
+  }
+}
+@mixin landscape {
+  @media (orientation:landscape) {
+    @content;
+  }
+}
+
+@mixin smallDevice {
+  @media (max-width: #{$small-device-width}) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media (min-width: #{$tablet-width}) {
@@ -44,8 +67,7 @@ body {
     z-index         : -1;
     position        : absolute;
     @include tablet {
-      //clip-path: polygon(41% 0, 100% 0%, 100% 100%, 15% 100%);
-      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 25% 100%);
+      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 30% 100%);
     }
     @include desktop {
       clip-path: polygon(50% 0, 100% 0%, 100% 100%, 30% 100%);
@@ -64,9 +86,9 @@ body {
 
   //queries main
   @include tablet {
-    width                : 90%;
-    padding              : 50px 0;
+    width                : 95%;
     margin               : 0 auto;
+    padding              : 50px 0;
     grid-template-columns: 1fr;
     grid-template-rows   : 2fr 1fr;
     grid-template-areas  : "header header" "footer footer";
@@ -80,16 +102,18 @@ body {
     }
   }
   @include desktop {
-    width: 60%;
+    max-width: 2000px;
+    margin   : 0 auto;
   }
 
   .header__container {
     grid-area: header;
-
     //form
     .header__form {
+      max-height: 50px;
       @include tablet {
         grid-area: search;
+        min-width: 330px;
       }
 
       form {
@@ -135,15 +159,22 @@ body {
 
     //city title
     .city {
-      padding-top: 20px;
+      margin-top : 20px;
+      word-wrap  : break-word;
+      padding-top: 0;
       color      : $secondary;
+
+      h1 {
+        word-wrap: break-word;
+      }
 
       img {
         width: 150px;
       }
       @include tablet {
+        max-width: 400px;
         color    : $primary;
-        font-size: 2em;
+        font-size: 1.5em;
         grid-area: city;
 
         img {
@@ -152,24 +183,51 @@ body {
           width: 180px;
         }
       };
+      @include desktop {
+        font-size: 2em;
+        max-width: 600px;
+      }
+      @include landscapeSmallDevice {
+        display: none;
+      }
     }
+
     //end city title
   }
   //end header container
 
   //info
   .main__info {
-    font-size : 1.5em;
+    font-size : 1.2em;
     color     : $secondary;
     text-align: left;
 
+    p {
+      padding-top: 15px;
+    }
+
     @include tablet {
       grid-area: info;
+      font-size: 1.5em;
 
       p {
         padding-top: 20px;
       }
     };
+    @include smallDevice {
+      font-size: 0.8em;
+
+      p {
+        padding-top: 5px;
+      }
+    }
+    @include landscape {
+      max-height: 200px;
+      overflow  : auto;
+    }
+    @include landscapeBigDevice {
+      max-height: 1000px;
+    }
   }
   //end info
 
@@ -202,6 +260,10 @@ body {
       &:hover {
         border: 8px solid $primary;
       }
+    }
+
+    &:active {
+      border: 0;
     }
   }
 
