@@ -246,7 +246,7 @@ body {
     @include landscapeBigDevice {
       max-height: 500px;
       overflow  : auto;
-      font-size : 2em;
+      font-size : 1.5em;
     }
     @include landscapeSmallDevice {
       margin-top: 20px;
