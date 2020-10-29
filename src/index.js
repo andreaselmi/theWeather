@@ -126,7 +126,7 @@ function success(position) {
 }
 
 function error(err) {
-  displayError()
+  displayErrors()
 };
 
 location.click(function() {
